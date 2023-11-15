@@ -12,6 +12,8 @@ def clean_year (year):
     elif len(cln_year) <= 4:
         return cln_year
 
+# method to add missing year or runtime for each movie 
+# for runtimes returned by the imdb library the method calls the convrt_run_time method to change time format 
 def insrt_null_row (movie,column):
     data=""
     search_movie = ia.search_movie(movie)
