@@ -1,6 +1,7 @@
 import imdb
 ia = imdb.Cinemagoer()
 
+# method to remove unecesarry characters from the year column 
 def clean_year (year):
     cln_year=""
     for num in year:
@@ -13,9 +14,11 @@ def clean_year (year):
         return cln_year
 
 # method to add missing year or runtime for each movie 
-# for runtimes returned by the imdb library the method calls the convrt_run_time method to change time format 
+# for runtimes returned by the imdb library the method calls the convrt_run_time method to change the time format to h:mm
 def insrt_null_row (movie,column):
     data=""
+    #Query the movie title from this cell against the IMDB library
+    # take the first element to then query the year or runtime based on parameter passed to this method 
     search_movie = ia.search_movie(movie)
     movie_id = search_movie[0].movieID
     if len(search_movie)>0:
@@ -37,12 +40,14 @@ def insrt_null_row (movie,column):
     else:
         return ""
         
+# method to clean the stars column by removing extra spaces
 def clean_stars (stars):
     char_remov = ["    ","|"]
     for char in char_remov:
         stars = stars.replace(char, "")
     return stars
 
+# method to convert runtime for reach rows' run time from mm format to h:mm 
 def convrt_run_time (time_arg):
     if '.' in time_arg:
         time_arg=time_arg.split('.')[0]
